@@ -661,7 +661,7 @@ func (self *Client) Describe() (streams []sdp.Media, err error) {
 	return
 }
 
-func (self *Client) Options() (err error) {
+func (self *Client) Options() (rsp Response, err error) {
 	req := Request{
 		Method: "OPTIONS",
 		Uri:    self.requestUri,
@@ -672,7 +672,7 @@ func (self *Client) Options() (err error) {
 	if err = self.WriteRequest(req); err != nil {
 		return
 	}
-	if _, err = self.ReadResponse(); err != nil {
+	if rsp, err = self.ReadResponse(); err != nil {
 		return
 	}
 	return
